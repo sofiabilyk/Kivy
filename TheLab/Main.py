@@ -1,3 +1,4 @@
+#importing libraries for this project
 from kivy.app import App
 from kivy.uix.anchorlayout import AnchorLayout 
 from kivy.uix.widget import Widget
@@ -9,17 +10,21 @@ from kivy.properties import StringProperty, BooleanProperty
 from kivy.graphics.vertex_instructions import Line
 from kivy.properties import Clock
 import tkinter
-#from kivy.uix.scrollview import ScrollView
 
+# CREATING A COUNTER, WHICH ADDS ONE TO THE EXISTING NUMBER,
+# WHEN WE PRESS THE BUTTON "COUNT"
+# CREATING A BUTTON "ON-OFF", WHICH LET US COUNT ONLY
+# WHEN THERE IS "ON" MODE
 class WidgetExample(GridLayout):
     my_text = StringProperty("1")
     able = BooleanProperty(False)
     text_input_str = StringProperty(("foo"))
-    #slider_value = StringProperty("50")
+    # ADD ONE WHEN CLICK "COUNT"
     def on_button_click(self):
         print("Button clicked")
         if self.able : 
             self.my_text = str(int(self.my_text) + 1)
+    # CHANGING THE STATE OF BUTTON ON EVERY PUSH
     def on_toggle_button_state(self, widget) :
         print("toggle state: " + widget.state)
         if widget.state == "normal" :
@@ -28,6 +33,7 @@ class WidgetExample(GridLayout):
         else:
             widget.text = "ON"
             self.able = True
+    #CREATING TEST SWITCHER
     def on_switch_active(self, widget):
         print("Switch: " + str(widget.active))
         
@@ -37,7 +43,8 @@ class WidgetExample(GridLayout):
     def on_text_validate(self, widget):
         self.text_input_str = widget.text
         
- 
+# STACK LAYOUT EXAMPLE WITH A FUNCTION THAT LET AS TO CREATE
+# AN AMOUNT OF ELEMENTS
 class StackLayoutExample(StackLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -56,6 +63,8 @@ class AnchorLayoutExample(AnchorLayout):
 class BoxLayoutExample(BoxLayout):
     pass
 """
+# WE CAN "DECORE" WIDGETS HERE O IN .kv FILE
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.orientation = "vertical"
@@ -71,6 +80,7 @@ class MainWidget(Widget):
 class TheLabApp(App) :
     pass
 
+# PLAYING WITH CNVAS, ITS SHAPES AND PROPERTIES
 class CanvasExample1(Widget):
     pass
 
