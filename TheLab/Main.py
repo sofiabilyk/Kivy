@@ -6,6 +6,9 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.properties import StringProperty, BooleanProperty
+from kivy.graphics.vertex_instructions import Line
+from kivy.properties import Clock
+import tkinter
 #from kivy.uix.scrollview import ScrollView
 
 class WidgetExample(GridLayout):
@@ -66,6 +69,52 @@ class MainWidget(Widget):
     pass
 
 class TheLabApp(App) :
+    pass
+
+class CanvasExample1(Widget):
+    pass
+
+class CanvasExample2(Widget):
+    pass
+
+class CanvasExample3(Widget):
+    pass
+
+class CanvasExample4(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        with self.canvas:
+            Line(points=(100, 100, 400, 500), width=2)
+            Line(circle=(400, 200, 20), width=2)
+            Line(Rectangle=(800, 100, 300, 30), width=2)
+            self.rect = Rectangle(pos=(700, 200), size=(150, 100))
+    def on_button_a_click(self):
+        x, y = self.rect.pos
+        x += dp(50)
+        self.rect.pos = (x, y)
+        
+class CanvasExample5(Widget):
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self.ball_size = "50dp"
+            self.vx = "3dp"
+            self.vy = "3dp"
+            with self.canvas:
+                self.ball = Ellipse(pos=self.center, size=(self.ball_size, self.ball_size))
+            #to schedule the update every second
+            Clock.schedule_interval(self.update, 1)
+        # The function to print a size of the window, when it's been changed
+        def on_size(self, *args):
+            print("on size : " + str(self.width) + ", " + str(self.height))
+            self.ball.pos = (self.center_x - self.ball_size/2, self.center_y-self.ball_size/2)
+        def update(self, dt):
+            print("update")
+            x, y = self.ball.pos
+            x += self.vx
+            y += self.vy
+            self.ball.pos = (x + 10, y)
+            
+class CanvasExample6(Widget):
     pass
 
 TheLabApp().run()
